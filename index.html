@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>He Huajun · 个人主页</title>
+<meta name="description" content="辽宁师范大学 · 信息与计算科学 · 数学与计算机双修 · AI & 量化方向" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a18;
+  --surface: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #f0f0f5;
+  --text-dim: #a8a8c5;
+  --text-muted: #71718a;
+  --primary: #a78bfa;
+  --accent: #ec4899;
+  --accent-2: #06b6d4;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #06b6d4 100%);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.3;
+  animation: float 20s infinite ease-in-out;
+}
+.orb-1 { width: 500px; height: 500px; background: #8b5cf6; top: -20%; left: -10%; }
+.orb-2 { width: 400px; height: 400px; background: #ec4899; top: 20%; right: -10%; animation-delay: -7s; }
+.orb-3 { width: 450px; height: 450px; background: #06b6d4; bottom: -20%; left: 30%; animation-delay: -14s; }
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, -80px) scale(1.1); }
+  66% { transform: translate(-80px, 60px) scale(0.95); }
+}
+
+/* ============== NAV ============== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 0;
+  backdrop-filter: blur(20px);
+  background: rgba(10, 10, 24, 0.55);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 16px;
+}
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 15px;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  font-size: 14px;
+}
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* ============== LAYOUT ============== */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 32px 80px;
+}
+
+/* ============== PROFILE CARD (Glassmorphism) ============== */
+.profile-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--gradient);
+  opacity: 0.6;
+}
+.avatar-wrap {
+  text-align: center;
+}
+.avatar {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 54px;
+  font-weight: 900;
+  color: white;
+  box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4);
+  position: relative;
+  animation: pulse 3s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4); }
+  50% { box-shadow: 0 20px 70px rgba(236, 72, 153, 0.5); }
+}
+.avatar-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent);
+  border-right-color: var(--primary);
+  animation: spin 12s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.avatar-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+.profile-info h1 {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.profile-info .tagline {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.profile-info .bio {
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: var(--primary);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+.badge.pink { background: rgba(236, 72, 153, 0.1); border-color: rgba(236, 72, 153, 0.3); color: var(--accent); }
+.badge.cyan { background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); color: var(--accent-2); }
+.badge.green { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success); }
+
+.social-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: var(--gradient);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139, 92, 246, 0.55); }
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  box-shadow: none;
+  color: var(--text);
+}
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.08); }
+
+/* ============== INFO GRID ============== */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.info-card {
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s;
+}
+.info-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(139, 92, 246, 0.35);
+}
+.info-card .label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.info-card .value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============== SECTION ============== */
+.section {
+  margin-bottom: 48px;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.section-title .line {
+  flex: 0 0 32px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gradient);
+}
+.section-title h2 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.section-title .sub {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+/* ============== SKILLS ============== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.skill {
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.25s;
+}
+.skill:hover {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.skill-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.skill-level {
+  font-size: 11px;
+  color: var(--primary);
+  font-weight: 700;
+  padding: 3px 8px;
+  background: rgba(139, 92, 246, 0.12);
+  border-radius: 6px;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.skill-tags span {
+  font-size: 11px;
+  padding: 4px 9px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-dim);
+}
+.skill-progress {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.skill-progress-bar {
+  height: 100%;
+  background: var(--gradient);
+  border-radius: 10px;
+  transition: width 1.5s ease-out;
+}
+
+/* ============== ROADMAP TIMELINE ============== */
+.timeline {
+  position: relative;
+  padding-left: 36px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), var(--accent), var(--accent-2));
+  opacity: 0.4;
+}
+.timeline-item {
+  position: relative;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 14px;
+  transition: all 0.25s;
+}
+.timeline-item:hover {
+  background: rgba(139, 92, 246, 0.06);
+  border-color: rgba(139, 92, 246, 0.3);
+  transform: translateX(4px);
+}
+.timeline-dot {
+  position: absolute;
+  left: -31px;
+  top: 18px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gradient);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+}
+.timeline-period {
+  font-size: 11.5px;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.timeline-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.timeline-content {
+  color: var(--text-dim);
+  font-size: 13.5px;
+}
+.timeline-content ul { list-style: none; }
+.timeline-content li { padding: 3px 0; }
+.timeline-content li::before {
+  content: '▸';
+  color: var(--primary);
+  margin-right: 6px;
+}
+
+/* ============== QUOTES ============== */
+.quotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.quote {
+  padding: 24px 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  position: relative;
+  transition: all 0.25s;
+}
+.quote:hover {
+  transform: translateY(-3px);
+  background: rgba(139, 92, 246, 0.06);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+.quote-icon {
+  font-size: 36px;
+  color: rgba(139, 92, 246, 0.35);
+  line-height: 1;
+  font-family: Georgia, serif;
+  margin-bottom: 8px;
+}
+.quote p {
+  color: var(--text-dim);
+  font-size: 13.5px;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* ============== FOOTER ============== */
+footer {
+  text-align: center;
+  padding: 32px 0 16px;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+/* ============== RESPONSIVE ============== */
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .profile-card {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .badge-row, .social-row { justify-content: center; }
+  .info-grid { grid-template-columns: 1fr; }
+  .quotes { grid-template-columns: 1fr; }
+  .profile-info h1 { font-size: 34px; }
+  .container { padding: 32px 20px 60px; }
+}
+</style>
+</head>
+<body>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-icon">H</div>
+      <div>He Huajun</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#roadmap">规划</a></li>
+      <li><a href="#philosophy">理念</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ============ PROFILE CARD ============ -->
+  <section id="about" class="section">
+    <div class="profile-card">
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <div class="avatar-ring"></div>
+          HH
+        </div>
+        <div class="avatar-subtitle">LNNU · INFO & COMP SCI</div>
+      </div>
+      <div class="profile-info">
+        <h1>何华军 · He Huajun</h1>
+        <div class="tagline">辽宁师范大学 · 信息与计算科学 · 2025级</div>
+        <p class="bio">
+          数学 + 计算机双修路线。相信技术与信息差是缩小成长差距的关键路径，
+          聚焦底层数学原理的掌握，同时打磨工程与自动化能力，
+          长期探索 AI、Linux、量化金融方向。
+        </p>
+        <div class="badge-row">
+          <span class="badge">🧮 数学</span>
+          <span class="badge pink">🐍 Python</span>
+          <span class="badge cyan">🐧 Linux</span>
+          <span class="badge green">🤖 AI</span>
+          <span class="badge">📈 量化</span>
+        </div>
+        <div class="social-row">
+          <a class="btn" href="https://github.com/ji969" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a class="btn btn-ghost" href="https://ji969.github.io/novel-galagame/" target="_blank" rel="noopener">
+            🎨 作品集
+          </a>
+          <a class="btn btn-ghost" href="mailto:example@example.com">
+            ✉️ 联系
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INFO GRID ============ -->
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="label">🎓 学校</div>
+      <div class="value">辽宁师范大学</div>
+    </div>
+    <div class="info-card">
+      <div class="label">📚 专业</div>
+      <div class="value">信息与计算科学</div>
+    </div>
+    <div class="info-card">
+      <div class="label">🚀 方向</div>
+      <div class="value">数学 + 编程 · AI / 量化</div>
+    </div>
+  </div>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="section">
+    <div class="section-title">
+      <span class="line"></span>
+      <h2>技能栈 <span class="sub">· Skills</span></h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill">
+        <div class="skill-header">
+          <div class="skill-name">🧮 数学基础</div>
+          <div class="skill-level">进阶中</div>
+        </div>
+        <div class="skill-progress"><div class="skill-progress-bar" style="width: 72%;"></div></div>
+        <div class="skill-tags">
+          <span>高等代数</span><span>数学分析</span><span>线性代数</span>
+          <span>傅里叶</span><span>数论</span>
+        </div>
+      </div>
+
+      <div class="skill">
+        <div class="skill-header">
+          <div class="skill-name">🐍 Python</div>
+          <div class="skill-level">熟练</div>
+        </div>
+        <div class="skill-progress"><div class="skill-progress-bar" style="width: 78%;"></div></div>
+        <div class="skill-tags">
+          <span>NumPy</span><span>Pandas</span><span>Matplotlib</span>
+          <span>自动化脚本</span>
+        </div>
+      </div>
+
+      <div class="skill">
+        <div class="skill-header">
+          <div class="skill-name">🐧 Linux & 运维</div>
+          <div class="skill-level">入门</div>
+        </div>
+        <div class="skill-progress"><div class="skill-progress-bar" style="width: 55%;"></div></div>
+        <div class="skill-tags">
+          <span>Ubuntu</span><span>Shell</span><span>服务器部署</span>
+          <span>Nginx</span>
+        </div>
+      </div>
+
+      <div class="skill">
+        <div class="skill-header">
+          <div class="skill-name">🤖 AI & 数据科学</div>
+          <div class="skill-level">入门</div>
+        </div>
+        <div class="skill-progress"><div class="skill-progress-bar" style="width: 48%;"></div></div>
+        <div class="skill-tags">
+          <span>机器学习</span><span>深度学习</span><span>大模型</span>
+          <span>数据分析</span>
+        </div>
+      </div>
+
+      <div class="skill">
+        <div class="skill-header">
+          <div class="skill-name">💻 编程工具</div>
+          <div class="skill-level">熟练</div>
+        </div>
+        <div class="skill-progress"><div class="skill-progress-bar" style="width: 75%;"></div></div>
+        <div class="skill-tags">
+          <span>Git</span><span>GitHub</span><span>VS Code</span>
+          <span>Vim</span><span>Jupyter</span>
+        </div>
+      </div>
+
+      <div class="skill">
+        <div class="skill-header">
+          <div class="skill-name">📈 量化金融</div>
+          <div class="skill-level">探索中</div>
+        </div>
+        <div class="skill-progress"><div class="skill-progress-bar" style="width: 32%;"></div></div>
+        <div class="skill-tags">
+          <span>金融数学</span><span>CFA</span>
+          <span>量化策略</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+  <section id="roadmap" class="section">
+    <div class="section-title">
+      <span class="line"></span>
+      <h2>成长路径 <span class="sub">· Roadmap</span></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2025 — 大 一</div>
+        <div class="timeline-title">打好地基 · 建立习惯</div>
+        <div class="timeline-content">
+          <ul>
+            <li>高等代数、数学分析、线性代数夯实</li>
+            <li>Python 熟练、算法题持续练习</li>
+            <li>Linux 命令行、Shell 脚本、服务器基础</li>
+            <li>搭建个人站点与作品集、积累 GitHub 活动</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2026 — 大 二</div>
+        <div class="timeline-title">深入方向 · 持续产出</div>
+        <div class="timeline-content">
+          <ul>
+            <li>概率论、数理统计、傅里叶、数值计算</li>
+            <li>机器学习与数据科学核心知识体系</li>
+            <li>独立完成 3-5 个完整开源项目</li>
+            <li>英语能力提升、阅读英文原版技术书</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2027 — 大 三</div>
+        <div class="timeline-title">定向突破 · 资源积累</div>
+        <div class="timeline-content">
+          <ul>
+            <li>CFA Level 1 备考、搭建量化金融知识框架</li>
+            <li>探索海外项目渠道，建立美元收入入口</li>
+            <li>参与竞赛 / 开源 / 实习，积累履历</li>
+            <li>把个人网站做成能承载简历与项目的门户</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2028+ · 未来</div>
+        <div class="timeline-title">经济独立 · 持续成长</div>
+        <div class="timeline-content">
+          <ul>
+            <li>依托数理 + 编程能力进入高回报方向</li>
+            <li>CFA / 海外硕 / 远程工作 — 多路并行</li>
+            <li>用技术与资本复利实现阶层跃迁</li>
+            <li>反哺：分享学习路径，帮助更多普通出身的人</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHILOSOPHY ============ -->
+  <section id="philosophy" class="section">
+    <div class="section-title">
+      <span class="line"></span>
+      <h2>我的理念 <span class="sub">· Philosophy</span></h2>
+    </div>
+
+    <div class="quotes">
+      <div class="quote">
+        <div class="quote-icon">&ldquo;</div>
+        <p>出身不可选择，但学习效率和信息获取能力是自己可以掌控的。资源上的差距，要靠系统化学习和搜索能力补回来。</p>
+      </div>
+      <div class="quote">
+        <div class="quote-icon">&ldquo;</div>
+        <p>数学给我底层逻辑，代码让我把逻辑落地成能跑的东西。两者缺一不可——缺数学只剩 API 调用，缺代码只是纸上谈兵。</p>
+      </div>
+      <div class="quote">
+        <div class="quote-icon">&ldquo;</div>
+        <p>不内卷不焦虑，每天比昨天多懂一点点就够了。长期看，复利由一个个稳定的小进步叠加而成，比短期冲刺更靠谱。</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2026 He Huajun · Built with HTML + CSS · Hosted on GitHub Pages</p>
+  <p style="margin-top: 8px; opacity: 0.6;">辽宁师范大学 · 信息与计算科学 · ji969</p>
+</footer>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    if (href.length > 1) {
+      const el = document.querySelector(href);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+});
+
+// Progress bars animation on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate');
+      const bar = entry.target.querySelector('.skill-progress-bar');
+      if (bar) {
+        const targetWidth = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.width = targetWidth; }, 150);
+      }
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.skill').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
